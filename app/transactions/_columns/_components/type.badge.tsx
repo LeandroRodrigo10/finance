@@ -23,7 +23,6 @@ const TransactionTypeBadge = ({transaction}: TransactionTypeBadgeProps) => {
                 Despesa
             </Badge>
         );
-
     }
     return (
         <Badge className="hover:bg-muted font-bold text-white bg-white bg-opacity-10">
