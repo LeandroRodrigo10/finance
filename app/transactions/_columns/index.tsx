@@ -1,33 +1,14 @@
 "use client"
 
 
-import { Transaction, TransactionCategory, TransactionType } from "@prisma/client"
+import { Transaction } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
 import TransactionTypeBadge from "./_components/type.badge";
 import { Button } from "@/app/_components/ui/button";
-import { Pencil, PencilIcon, TrashIcon } from "lucide-react";
+import { PencilIcon, TrashIcon } from "lucide-react";
+import { TRANSACTION_PAYMENT_METHOD_LABELS, TRANSACTION_CATEGORY_LABELS } from "@/app/_constants/transactions";
 
-export const TRASACTION_CATEGORY_LABELS = {
-    EDUCATION: "Educação",
-    ENTERTAINMENT: "Entreterimento",
-    FOOD: "Alimentação",
-    HEALTH: "Saúde",
-    HOUSING: "Moradia",
-    OTHER: "Outros",
-    SALARY: "Salário",
-    TRANSPORTATION: "Transporte",
-    UTILITY: "Utilidades",
-};
 
-export const TRANSACTION_PAYMENT_METHOD_LABELS = {
-    BANK_TRANSFER: "Transferência Bancária",
-    BANK_SLIP: "Boleto Bancário",
-    CASH: "Dinheiro",
-    CREDIT_CARD: "Cartão de Crédito",
-    DEBIT_CARD: "Cartão de Débito",
-    OTHER: "Outros",
-    PIX: "Pix",
-};
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
     {
@@ -46,7 +27,7 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
         accessorKey: "category",
         header: "Categoria",
         cell: ({ row: { original: trasaction } }) =>
-            TRASACTION_CATEGORY_LABELS[trasaction.category],
+            TRANSACTION_CATEGORY_LABELS[trasaction.category],
     },
     {
         accessorKey: "paymentMethod",
