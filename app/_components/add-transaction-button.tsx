@@ -2,7 +2,7 @@
 
 import { ArrowDownUpIcon } from "lucide-react";
 import { Button } from "./ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 
 import { z } from "zod";
 import { TransactionCategory, TransactionPaymentMethod, TransactionType } from "@prisma/client";
@@ -14,6 +14,7 @@ import { Select } from "@radix-ui/react-select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { TRANSACTION_CATEGORY_OPTIONS, TRANSACTION_PAYMENT_METHOD_OPTIONS, TRANSACTION_TYPE_OPTIONS } from "../_constants/transactions";
+import { DatePicker } from "./ui/date-picker";
 
 
 
@@ -61,7 +62,12 @@ const AddTransactionButton = () => {
     }
 
     return (
-        <Dialog>
+        <Dialog onOpenChange={(open) => {
+            if (!open) {
+                form.reset();
+            }
+        }}
+        >
             <DialogTrigger asChild>
                 <Button className="rounded-full font-bold">
                     Adicionar Transação
@@ -149,7 +155,6 @@ const AddTransactionButton = () => {
                                     </Select>
                                     <FormMessage />
                                 </FormItem>
-
                             )}
                         />
                         <FormField
@@ -174,16 +179,31 @@ const AddTransactionButton = () => {
                                     </Select>
                                     <FormMessage />
                                 </FormItem>
-
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="date"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Data</FormLabel>
+                                    <DatePicker value={field.value} onChange={field.onChange} />
+                                    <FormMessage />
+                                </FormItem>
                             )}
                         />
                         <DialogFooter>
-                            <Button variant="outline">Cancelar</Button>
-                            <Button>Adicionar</Button>
+                            <DialogClose asChild>
+                            <Button type="button" variant="outline">
+                                Cancelar
+                            </Button>
+                            </DialogClose>
+                            <Button type="submit">
+                                Adicionar
+                            </Button>
                         </DialogFooter>
                     </form>
                 </Form>
-
             </DialogContent>
         </Dialog >
     );
