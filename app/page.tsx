@@ -3,15 +3,12 @@ import { redirect } from "next/navigation";
 import Navbar from "./_components/navbar";
 
 const Home = async () => {
-  
-  const {userId} = await auth();
+  const { userId } = await auth();
   if (!userId) {
     redirect("/login");
   }
 
-  return ( 
-    <Navbar />
-  );
+  return <Navbar />;
 };
 
 export default Home;
