@@ -33,4 +33,4 @@ const TransactionTypeBadge = ({transaction}: TransactionTypeBadgeProps) => {
     );
 }
 
-export default TransactionTypeBadge
+export default TransactionTypeBadge;
