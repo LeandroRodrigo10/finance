@@ -47,5 +47,4 @@ const SummaryCards = async ({
         </div>
     );
 }
-
 export default SummaryCards;
