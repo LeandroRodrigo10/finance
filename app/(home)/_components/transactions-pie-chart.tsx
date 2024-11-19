@@ -1,20 +1,18 @@
-"use client"
+"use client";
 
-import { Pie, PieChart } from "recharts"
+import { Pie, PieChart } from "recharts";
 
-import { Card, CardContent } from "@/app/_components/ui/card"
-
+import { Card, CardContent } from "@/app/_components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/app/_components/ui/chart"
-
-import { TransactionType } from "@prisma/client"
-import { TransactionPercentagePerType } from "@/app/_data/get-dashboard/types"
-import { PiggyBankIcon, TrendingDownIcon, TrendingUpIcon } from "lucide-react"
-import PercentageItem from "./percentage-item"
+} from "@/app/_components/ui/chart";
+import { TransactionType } from "@prisma/client";
+import { TransactionPercentagePerType } from "@/app/_data/get-dashboard/types";
+import { PiggyBankIcon, TrendingDownIcon, TrendingUpIcon } from "lucide-react";
+import PercentageItem from "./percentage-item";
 
 const chartConfig = {
   [TransactionType.INVESTMENT]: {
@@ -32,7 +30,6 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface TransactionsPieChartProps {
-
   typesPercentage: TransactionPercentagePerType;
   depositsTotal: number;
   investmentsTotal: number;
@@ -44,7 +41,6 @@ const TransactionsPieChart = ({
   investmentsTotal,
   expensesTotal,
   typesPercentage,
-
 }: TransactionsPieChartProps) => {
   const chartData = [
     {
@@ -63,7 +59,6 @@ const TransactionsPieChart = ({
       fill: "#FFFFFF",
     },
   ];
-
   return (
     <Card className="flex flex-col p-6">
       <CardContent className="flex-1 pb-0">
@@ -84,27 +79,27 @@ const TransactionsPieChart = ({
             />
           </PieChart>
         </ChartContainer>
+
         <div className="space-y-3">
           <PercentageItem
-            icon={<TrendingUpIcon size={16}  className="text-primary"/>}
+            icon={<TrendingUpIcon size={16} className="text-primary" />}
             title="Receita"
             value={typesPercentage[TransactionType.DEPOSIT]}
           />
           <PercentageItem
-            icon={<TrendingDownIcon size={16} className="text-red-500"/>}
+            icon={<TrendingDownIcon size={16} className="text-red-500" />}
             title="Despesas"
-            value={typesPercentage[TransactionType.DEPOSIT]}
+            value={typesPercentage[TransactionType.EXPENSE]}
           />
-
           <PercentageItem
             icon={<PiggyBankIcon size={16} />}
-            title="Ivestido"
-            value={typesPercentage[TransactionType.DEPOSIT]}
+            title="Investido"
+            value={typesPercentage[TransactionType.INVESTMENT]}
           />
         </div>
       </CardContent>
     </Card>
   );
-}
+};
 
 export default TransactionsPieChart;
